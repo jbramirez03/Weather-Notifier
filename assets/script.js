@@ -1,5 +1,8 @@
+var test = document.querySelector("#test")
+
+
 function getAPi () {
-var requestedURL  = "https://api.openweathermap.org/data/2.5/weather?q=burlington,nc$limit=1&appid=bcf6554b28b8c3bcc30e90eb27275f00";
+var requestedURL  = "https://api.openweathermap.org/data/2.5/weather?q=burlington&limit=1&appid=bcf6554b28b8c3bcc30e90eb27275f00";
 
     fetch(requestedURL)
         .then(function (response) {
@@ -8,7 +11,19 @@ var requestedURL  = "https://api.openweathermap.org/data/2.5/weather?q=burlingto
         .then(function(data) {
             console.log(data);
             console.log(data.coord);
+            var longtitudeCoord = data.coord.lon;
+            var latitudeCoord = data.coord.lat;
+            test.textContent = `${longtitudeCoord}, ${latitudeCoord}`;
+            var nextURl = "https://api.openweathermap.org/data/2.5/onecall?lat=" + latitudeCoord + "&lon=" + longtitudeCoord + "&appid=bcf6554b28b8c3bcc30e90eb27275f00";
+            fetch(nextURl)
+            .then(function(response) {
+                return response.json();
+            })
+            .then(function(data) {
+                console.log(data);
+            })
         })
+        
 }
 
 getAPi();
