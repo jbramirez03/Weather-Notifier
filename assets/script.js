@@ -45,9 +45,29 @@ searchButton.addEventListener("click", function(){
                 currentWindSpeed.textContent = "Wind Speed: " + windSpeed + " Mph";
                 uv = currenti.current.uvi;
                 currentUV.textContent = "UV index: " + uv;
-                
+
+                fiveDayForecast(currenti);
             })
         })
 
         
 })
+
+var weeklyWeatherBlocks = document.querySelectorAll(".weekly-weather");
+var weeklyDate = document.querySelectorAll(".weekly-date");
+
+function fiveDayForecast (url) {
+
+
+
+    for (var i = 0; i < weeklyWeatherBlocks.length; i++) {
+        // weeklyDate[i].textContent = url.daily[i].dt;
+        var date = url.daily[i + 1].dt;
+        var momentConvert = moment.unix(date).format("MM/DD/YYYY");
+        weeklyDate[i].textContent = momentConvert;
+    }
+
+
+
+
+}
