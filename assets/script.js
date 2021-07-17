@@ -69,6 +69,8 @@ function fiveDayForecast (url) {
         var date = url.daily[i + 1].dt;
         var momentConvert = moment.unix(date).format("MM/DD/YYYY");
         weeklyDate[i].textContent = momentConvert;
+        var icon = url.daily[i].weather[0].icon;
+        weeklyIcon[i].setAttribute("src", "http://openweathermap.org/img/wn/" + icon + "@2x.png");
     }
 
 
