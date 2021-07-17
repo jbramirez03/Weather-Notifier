@@ -5,7 +5,7 @@
 
 var searchButton = document.querySelector("#search-button");
 var cityInput = document.querySelector("#city-input");
-
+var currentWeather = document.querySelector("#current-weather");
 
 searchButton.addEventListener("click", function(){
     var cityChoice = cityInput.value;
@@ -24,10 +24,15 @@ searchButton.addEventListener("click", function(){
             .then(function(response) {
                 return response.json();
             })
-            .then(function(data) {
-                console.log(data);
+            .then(function(currenti) {
+                console.log(currenti);
+                console.log(currenti.current.temp);
+                var date = moment.unix(currenti.current.dt).format("MM/DD/YYYY");
+                var city = data.name;
+                currentWeather.textContent = `${city}: (${date})`;
+                
             })
         })
 
-
+        
 })
