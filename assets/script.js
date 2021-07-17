@@ -55,6 +55,10 @@ searchButton.addEventListener("click", function(){
 
 var weeklyWeatherBlocks = document.querySelectorAll(".weekly-weather");
 var weeklyDate = document.querySelectorAll(".weekly-date");
+var weeklyIcon = document.querySelectorAll(".weekly-image");
+var weeklyTemp = document.querySelectorAll(".weekly-temp");
+var weeklyWind = document.querySelectorAll(".weekly-wind");
+var weeklyHumidity = document.querySelectorAll(".weekly-humidity");
 
 function fiveDayForecast (url) {
 
