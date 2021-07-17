@@ -35,7 +35,7 @@ searchButton.addEventListener("click", function(){
                 weatherIcon.setAttribute("src", "http://openweathermap.org/img/wn/" + icon + "@2x.png");
                 weatherIcon.setAttribute("alt", currenti.current.weather[0].description);
                 var temp = currenti.current.temp;
-                currentTemp.textContent = `Temperature: ${temp}`;
+                currentTemp.textContent = `Temperature: ${temp} \u00B0F`;
                 
             })
         })
