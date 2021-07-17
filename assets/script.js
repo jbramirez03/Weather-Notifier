@@ -6,6 +6,8 @@
 var searchButton = document.querySelector("#search-button");
 var cityInput = document.querySelector("#city-input");
 var currentWeather = document.querySelector("#current-weather");
+var currentTemp = document.querySelector("#current-temp");
+var weatherIcon = document.querySelector("#weather-icon");
 
 searchButton.addEventListener("click", function(){
     var cityChoice = cityInput.value;
@@ -26,10 +28,14 @@ searchButton.addEventListener("click", function(){
             })
             .then(function(currenti) {
                 console.log(currenti);
-                console.log(currenti.current.temp);
                 var date = moment.unix(currenti.current.dt).format("MM/DD/YYYY");
                 var city = data.name;
+                var icon = currenti.current.weather[0].icon;
                 currentWeather.textContent = `${city}: (${date})`;
+                weatherIcon.setAttribute("src", "http://openweathermap.org/img/wn/" + icon + "@2x.png");
+                weatherIcon.setAttribute("alt", currenti.current.weather[0].description);
+                var temp = currenti.current.temp;
+                currentTemp.textContent = `Temperature: ${temp}`;
                 
             })
         })
