@@ -44,7 +44,17 @@ searchButton.addEventListener("click", function(){
                 var windSpeed = currenti.current.wind_speed;
                 currentWindSpeed.textContent = "Wind Speed: " + windSpeed + " Mph";
                 uv = currenti.current.uvi;
-                currentUV.textContent = "UV index: " + uv;
+                if ( uv >= 0 || uv <= 2.99) {
+                    currentUV.classList.add("low");
+                } else if (uv >= 3 || uv <= 5.99) {
+                    currentUV.classList.add("moderate");
+                } else if (uv >= 6 || uv <= 7.99) {
+                    currentUV.classList.add("high");
+                } else {
+                    currentUV.classList.add("very-high");
+                }
+            
+                currentUV.textContent = uv;
 
                 fiveDayForecast(currenti);
             })
