@@ -133,8 +133,10 @@ function makeCityList (input) {
     createdPEl.addEventListener("click", function() {
         var definedValue = createdPEl.innerHTML;
         cityPrevSearch(definedValue);
-    
-    })
+        
+
+        
+    });
 
 
 }
@@ -208,6 +210,8 @@ function makeCityList (input) {
                 currentUV.textContent = uv;
 
                 fiveDayForecast(currenti);
+                saveSearch();
+
             })
         })
     }
@@ -282,6 +286,20 @@ function makeCityList (input) {
         }
     
         var dateArray = JSON.parse(localStorage.getItem("dateArray"));
-        console.log(dateArray);
+        var iconArray = JSON.parse(localStorage.getItem("iconArray"));
+        var tempArray = JSON.parse(localStorage.getItem("tempArray"));   
+        var windArray = JSON.parse(localStorage.getItem("windArray"));
+        var humidityArray = JSON.parse(localStorage.getItem("humidityArray"));  
+           
+        for(var i = 0; i < weeklyWeatherBlocks.length; i++) {
+            weeklyDate[i].textContent = dateArray[i];
+            weeklyIcon[i].setAttribute("src",iconArray[i]);
+            weeklyTemp[i].textContent = tempArray[i];
+            weeklyWind[i].textContent = windArray[i];
+            weeklyHumidity[i].textContent = humidityArray[i];
+        }
+        
+        
+
     }
     showLastSearch();
