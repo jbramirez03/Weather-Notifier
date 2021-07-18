@@ -51,13 +51,26 @@ searchButton.addEventListener("click", function(){
                 var windSpeed = currenti.current.wind_speed;
                 currentWindSpeed.textContent = "Wind Speed: " + windSpeed + " Mph";
                 uv = currenti.current.uvi;
-                if ( uv >= 0 || uv <= 2.99) {
+                if ( uv >= 0 && uv <= 2.99) {
                     currentUV.classList.add("low");
-                } else if (uv >= 3 || uv <= 5.99) {
+                    currentUV.classList.remove("moderate");
+                    currentUV.classList.remove("high");
+                    currentUV.classList.remove("very-high");
+
+                } else if (uv >= 3 && uv <= 5.99) {
+                    currentUV.classList.remove("low");
+                    currentUV.classList.remove("high");
+                    currentUV.classList.remove("very-high");
                     currentUV.classList.add("moderate");
-                } else if (uv >= 6 || uv <= 7.99) {
+                } else if (uv >= 6 && uv <= 7.99) {
+                    currentUV.classList.remove("low");
+                    currentUV.classList.remove("moderate");
+                    currentUV.classList.remove("very-high");
                     currentUV.classList.add("high");
                 } else {
+                    currentUV.classList.remove("low");
+                    currentUV.classList.remove("moderate");
+                    currentUV.classList.remove("high");
                     currentUV.classList.add("very-high");
                 }
             
@@ -167,13 +180,26 @@ function makeCityList (input) {
                 var windSpeed = currenti.current.wind_speed;
                 currentWindSpeed.textContent = "Wind Speed: " + windSpeed + " Mph";
                 uv = currenti.current.uvi;
-                if ( uv >= 0 || uv <= 2.99) {
+                if ( uv >= 0 && uv <= 2.99) {
                     currentUV.classList.add("low");
-                } else if (uv >= 3 || uv <= 5.99) {
+                    currentUV.classList.remove("moderate");
+                    currentUV.classList.remove("high");
+                    currentUV.classList.remove("very-high");
+
+                } else if (uv >= 3 && uv <= 5.99) {
+                    currentUV.classList.remove("low");
+                    currentUV.classList.remove("high");
+                    currentUV.classList.remove("very-high");
                     currentUV.classList.add("moderate");
-                } else if (uv >= 6 || uv <= 7.99) {
+                } else if (uv >= 6 && uv <= 7.99) {
+                    currentUV.classList.remove("low");
+                    currentUV.classList.remove("moderate");
+                    currentUV.classList.remove("very-high");
                     currentUV.classList.add("high");
                 } else {
+                    currentUV.classList.remove("low");
+                    currentUV.classList.remove("moderate");
+                    currentUV.classList.remove("high");
                     currentUV.classList.add("very-high");
                 }
             
