@@ -25,3 +25,8 @@
 #current-uv {
     border-radius: 3px;
 }
+
+.city-list-style {
+    background-color: rgb(202, 199, 199);
+    border-radius: 3px;
+}

@@ -11,9 +11,15 @@ var weatherIcon = document.querySelector("#weather-icon");
 var currenthumidity = document.querySelector("#current-humidity");
 var currentWindSpeed = document.querySelector("#current-wind");
 var currentUV = document.querySelector("#current-uv");
+var cityNamesList = document.querySelector(".city-name-list");
 
 searchButton.addEventListener("click", function(){
     var cityChoice = cityInput.value;
+
+    makeCityList(cityInput.value);
+    
+    
+    
     var cityWeatherURL  = "https://api.openweathermap.org/data/2.5/weather?q=" + cityChoice + "&limit=1&appid=bcf6554b28b8c3bcc30e90eb27275f00";
     fetch(cityWeatherURL)
         .then(function (response) {
@@ -92,4 +98,19 @@ function fiveDayForecast (url) {
 
 
 
+}
+
+
+function makeCityList (input) {
+    var createdRow = document.createElement("div");
+    createdRow.setAttribute("class", "row");
+    var createdContainer = document.createElement("div");
+    createdContainer.setAttribute("class", "container");
+    createdContainer.classList.add("text-center");
+    var createdPEl = document.createElement("p");
+    createdPEl.textContent = input;
+    createdPEl.setAttribute("class", "city-list-style");
+    createdContainer.append(createdPEl);
+    createdRow.append(createdContainer);
+    cityNamesList.append(createdRow);
 }
