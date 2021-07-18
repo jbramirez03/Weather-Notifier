@@ -12,6 +12,7 @@ var currenthumidity = document.querySelector("#current-humidity");
 var currentWindSpeed = document.querySelector("#current-wind");
 var currentUV = document.querySelector("#current-uv");
 var cityNamesList = document.querySelector(".city-name-list");
+var clearBtn = document.querySelector("#clear-button");
 
 searchButton.addEventListener("click", function(){
     var cityChoice = cityInput.value;
@@ -113,4 +114,12 @@ function makeCityList (input) {
     createdContainer.append(createdPEl);
     createdRow.append(createdContainer);
     cityNamesList.append(createdRow);
+
+
 }
+
+    clearBtn.addEventListener("click", function () {
+        cityNamesList.innerHTML = '';  
+    })
+
+
