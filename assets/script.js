@@ -28,7 +28,7 @@ searchButton.addEventListener("click", function(){
         })
         .then(function(data) {
             console.log(data);
-            console.log(data.coord);
+            // console.log(data.coord);
             var longtitudeCoord = data.coord.lon;
             var latitudeCoord = data.coord.lat;
             var currentWeatherUrl = "https://api.openweathermap.org/data/2.5/onecall?lat=" + latitudeCoord + "&lon=" + longtitudeCoord + "&units=imperial&appid=bcf6554b28b8c3bcc30e90eb27275f00";
@@ -144,7 +144,7 @@ function makeCityList (input) {
         })
         .then(function(data) {
             console.log(data);
-            console.log(data.coord);
+            // console.log(data.coord);
             var longtitudeCoord = data.coord.lon;
             var latitudeCoord = data.coord.lat;
             var currentWeatherUrl = "https://api.openweathermap.org/data/2.5/onecall?lat=" + latitudeCoord + "&lon=" + longtitudeCoord + "&units=imperial&appid=bcf6554b28b8c3bcc30e90eb27275f00";
