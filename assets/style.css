@@ -30,4 +30,5 @@
 .city-list-style {
     background-color: rgb(75, 219, 228);
     border-radius: 3px;
+    cursor: pointer;
 }

@@ -42,7 +42,7 @@ searchButton.addEventListener("click", function(){
                 var city = data.name;
                 var icon = currenti.current.weather[0].icon;
                 currentWeather.textContent = `${city}: (${date})`;
-                weatherIcon.setAttribute("src", "http://openweathermap.org/img/wn/" + icon + "@2x.png");
+                weatherIcon.setAttribute("src", "https://openweathermap.org/img/wn/" + icon + "@2x.png");
                 weatherIcon.setAttribute("alt", currenti.current.weather[0].description);
                 var temp = currenti.current.temp;
                 currentTemp.textContent = `Temperature: ${temp} \u00B0F`;
@@ -87,7 +87,7 @@ function fiveDayForecast (url) {
         var momentConvert = moment.unix(date).format("MM/DD/YYYY");
         weeklyDate[i].textContent = momentConvert;
         var icon = url.daily[i].weather[0].icon;
-        weeklyIcon[i].setAttribute("src", "http://openweathermap.org/img/wn/" + icon + "@2x.png");
+        weeklyIcon[i].setAttribute("src", "https://openweathermap.org/img/wn/" + icon + "@2x.png");
         var temp = url.daily[i].temp.max;
         weeklyTemp[i].textContent = "Temp: " + temp;
         var wind = url.daily[i].wind_speed;
@@ -158,7 +158,7 @@ function makeCityList (input) {
                 var city = data.name;
                 var icon = currenti.current.weather[0].icon;
                 currentWeather.textContent = `${city}: (${date})`;
-                weatherIcon.setAttribute("src", "http://openweathermap.org/img/wn/" + icon + "@2x.png");
+                weatherIcon.setAttribute("src", "https://openweathermap.org/img/wn/" + icon + "@2x.png");
                 weatherIcon.setAttribute("alt", currenti.current.weather[0].description);
                 var temp = currenti.current.temp;
                 currentTemp.textContent = `Temperature: ${temp} \u00B0F`;
