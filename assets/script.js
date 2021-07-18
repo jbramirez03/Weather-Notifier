@@ -28,7 +28,9 @@ searchButton.addEventListener("click", function(){
             return response.json();
         })
         .then(function(data) {
+            
             console.log(data);
+           
             // console.log(data.coord);
             var longtitudeCoord = data.coord.lon;
             var latitudeCoord = data.coord.lat;
