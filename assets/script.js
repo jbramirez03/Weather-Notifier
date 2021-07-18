@@ -77,6 +77,7 @@ searchButton.addEventListener("click", function(){
                 currentUV.textContent = uv;
 
                 fiveDayForecast(currenti);
+                saveSearch();
             })
         })
 
@@ -210,3 +211,12 @@ function makeCityList (input) {
         })
     }
 
+    function saveSearch () {
+        var savedCurrentWeather = currentWeather.textContent;
+        var savedCurrentTemp = currentTemp.textContent;
+        var savedCurrentIcon = weatherIcon.getAttribute("src");
+        console.log(savedCurrentWeather);
+        console.log(savedCurrentTemp);
+        console.log(savedCurrentIcon);
+    }
+    
