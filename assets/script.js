@@ -13,6 +13,7 @@ var currentWindSpeed = document.querySelector("#current-wind");
 var currentUV = document.querySelector("#current-uv");
 var cityNamesList = document.querySelector(".city-name-list");
 var clearBtn = document.querySelector("#clear-button");
+var uvBlock = document.querySelector(".Uv-block");
 
 searchButton.addEventListener("click", function(){
     var cityChoice = cityInput.value;
@@ -215,8 +216,72 @@ function makeCityList (input) {
         var savedCurrentWeather = currentWeather.textContent;
         var savedCurrentTemp = currentTemp.textContent;
         var savedCurrentIcon = weatherIcon.getAttribute("src");
-        console.log(savedCurrentWeather);
-        console.log(savedCurrentTemp);
-        console.log(savedCurrentIcon);
+        var savedCurrentHumidity = currenthumidity.textContent;
+        var savedCurrentWind = currentWindSpeed.textContent;
+        var savedCurrentUvi = currentUV.textContent;
+        localStorage.setItem("currentWeather",savedCurrentWeather);
+        localStorage.setItem("currentIcon",savedCurrentIcon);
+        localStorage.setItem("currentTemp",savedCurrentTemp);
+        localStorage.setItem("currentHumidity",savedCurrentHumidity);
+        localStorage.setItem("currentWind",savedCurrentWind);
+        localStorage.setItem("currentUvi",savedCurrentUvi);
+
+        var savedWeeklyWeather = document.querySelectorAll(".weekly-weather");
+        var dateArray = [];
+        var iconArray = [];
+        var tempArray = [];
+        var windArray = [];
+        var humidityArray = [];
+        for(var i = 0; i < savedWeeklyWeather.length; i++) {
+            dateArray.push(weeklyDate[i].textContent);
+            iconArray.push(weeklyIcon[i].getAttribute("src"));
+            tempArray.push(weeklyTemp[i].textContent);
+            windArray.push(weeklyWind[i].textContent);
+            humidityArray.push(weeklyHumidity[i].textContent);
+        }
+        
+        localStorage.setItem("dateArray", JSON.stringify(dateArray));
+        localStorage.setItem("iconArray", JSON.stringify(iconArray));
+        localStorage.setItem("tempArray", JSON.stringify(tempArray));
+        localStorage.setItem("windArray", JSON.stringify(windArray));
+        localStorage.setItem("humidityArray", JSON.stringify(humidityArray));
+
+        
     }
     
+
+    function showLastSearch () {
+        currentWeather.textContent = localStorage.getItem("currentWeather");
+        weatherIcon.setAttribute("src",localStorage.getItem("currentIcon"));
+        currentTemp.textContent = localStorage.getItem("currentTemp");
+        currenthumidity.textContent = localStorage.getItem("currentHumidity");
+        currentWindSpeed.textContent = localStorage.getItem("currentWind");
+        currentUV.textContent = localStorage.getItem("currentUvi");
+        var uv = currentUV.textContent;
+        if ( uv >= 0 && uv <= 2.99) {
+            currentUV.classList.add("low");
+            currentUV.classList.remove("moderate");
+            currentUV.classList.remove("high");
+            currentUV.classList.remove("very-high");
+
+        } else if (uv >= 3 && uv <= 5.99) {
+            currentUV.classList.remove("low");
+            currentUV.classList.remove("high");
+            currentUV.classList.remove("very-high");
+            currentUV.classList.add("moderate");
+        } else if (uv >= 6 && uv <= 7.99) {
+            currentUV.classList.remove("low");
+            currentUV.classList.remove("moderate");
+            currentUV.classList.remove("very-high");
+            currentUV.classList.add("high");
+        } else {
+            currentUV.classList.remove("low");
+            currentUV.classList.remove("moderate");
+            currentUV.classList.remove("high");
+            currentUV.classList.add("very-high");
+        }
+    
+        var dateArray = JSON.parse(localStorage.getItem("dateArray"));
+        console.log(dateArray);
+    }
+    showLastSearch();
