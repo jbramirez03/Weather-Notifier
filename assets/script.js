@@ -1,4 +1,4 @@
-
+// defined variables for current weather div 
 var searchButton = document.querySelector("#search-button");
 var cityInput = document.querySelector("#city-input");
 var currentWeather = document.querySelector("#current-weather");
@@ -11,13 +11,14 @@ var cityNamesList = document.querySelector(".city-name-list");
 var clearBtn = document.querySelector("#clear-button");
 var uvBlock = document.querySelector(".Uv-block");
 
+// function that calls api and display results in specified divs or elements once search button is clicked
 searchButton.addEventListener("click", function(){
     var cityChoice = cityInput.value;
 
     makeCityList(cityInput.value);
     
     
-    
+    // call made to this url which varies on the users city input
     var cityWeatherURL  = "https://api.openweathermap.org/data/2.5/weather?q=" + cityChoice + "&limit=1&appid=bcf6554b28b8c3bcc30e90eb27275f00";
     fetch(cityWeatherURL)
         .then(function (response) {
@@ -25,18 +26,20 @@ searchButton.addEventListener("click", function(){
         })
         .then(function(data) {
             
-            console.log(data);
+            // console.log(data);
            
             // console.log(data.coord);
             var longtitudeCoord = data.coord.lon;
             var latitudeCoord = data.coord.lat;
+            // uses second api that uses city name and gets coordinates then makes call to another api with those specific results
             var currentWeatherUrl = "https://api.openweathermap.org/data/2.5/onecall?lat=" + latitudeCoord + "&lon=" + longtitudeCoord + "&units=imperial&appid=bcf6554b28b8c3bcc30e90eb27275f00";
             fetch(currentWeatherUrl)
             .then(function(response) {
                 return response.json();
             })
             .then(function(currenti) {
-                console.log(currenti);
+                // console.log(currenti);
+                // results from data get displayed in elements
                 var date = moment.unix(currenti.current.dt).format("MM/DD/YYYY");
                 var city = data.name;
                 var icon = currenti.current.weather[0].icon;
@@ -50,6 +53,7 @@ searchButton.addEventListener("click", function(){
                 var windSpeed = currenti.current.wind_speed;
                 currentWindSpeed.textContent = "Wind Speed: " + windSpeed + " Mph";
                 uv = currenti.current.uvi;
+                // conditional to change background color of uv text depending on number
                 if ( uv >= 0 && uv <= 2.99) {
                     currentUV.classList.add("low");
                     currentUV.classList.remove("moderate");
@@ -82,7 +86,7 @@ searchButton.addEventListener("click", function(){
 
         
 })
-
+// declared variables for weekly content display
 var weeklyWeatherBlocks = document.querySelectorAll(".weekly-weather");
 var weeklyDate = document.querySelectorAll(".weekly-date");
 var weeklyIcon = document.querySelectorAll(".weekly-image");
@@ -91,7 +95,7 @@ var weeklyWind = document.querySelectorAll(".weekly-wind");
 var weeklyHumidity = document.querySelectorAll(".weekly-humidity");
 
 function fiveDayForecast (url) {
-
+// for loop that iterates through the data and selects five days to get results from
     for (var i = 0; i < weeklyWeatherBlocks.length; i++) {
         // weeklyDate[i].textContent = url.daily[i].dt;
         var date = url.daily[i + 1].dt;
@@ -109,7 +113,7 @@ function fiveDayForecast (url) {
 
 }
 
-
+// function to make all city searches appear underneath the search bar and a click on one of them results in an api call and displays the information
 function makeCityList (input) {
 
     var createdRow = document.createElement("div");
@@ -133,13 +137,13 @@ function makeCityList (input) {
     });
 
 }
-
+// clear button given functionality to clear all previous city seaches on click
     clearBtn.addEventListener("click", function () {
         cityNamesList.innerHTML = '';  
     })
 
 
-    
+    // function that makes api call once a previously searched city is clicked again
     function cityPrevSearch (val) {
         var cityChoice = val;
 
@@ -153,7 +157,7 @@ function makeCityList (input) {
             return response.json();
         })
         .then(function(data) {
-            console.log(data);
+            // console.log(data);
             // console.log(data.coord);
             var longtitudeCoord = data.coord.lon;
             var latitudeCoord = data.coord.lat;
@@ -163,7 +167,7 @@ function makeCityList (input) {
                 return response.json();
             })
             .then(function(currenti) {
-                console.log(currenti);
+                // console.log(currenti);
                 var date = moment.unix(currenti.current.dt).format("MM/DD/YYYY");
                 var city = data.name;
                 var icon = currenti.current.weather[0].icon;
@@ -208,7 +212,7 @@ function makeCityList (input) {
             })
         })
     }
-
+// saves content in current weather div and weekly weather divs
     function saveSearch () {
         var savedCurrentWeather = currentWeather.textContent;
         var savedCurrentTemp = currentTemp.textContent;
@@ -223,12 +227,14 @@ function makeCityList (input) {
         localStorage.setItem("currentWind",savedCurrentWind);
         localStorage.setItem("currentUvi",savedCurrentUvi);
 
+        // arrays used to store data from weekly weather blocks
         var savedWeeklyWeather = document.querySelectorAll(".weekly-weather");
         var dateArray = [];
         var iconArray = [];
         var tempArray = [];
         var windArray = [];
         var humidityArray = [];
+        // iterates through blocks and pushes data into defined arrays
         for(var i = 0; i < savedWeeklyWeather.length; i++) {
             dateArray.push(weeklyDate[i].textContent);
             iconArray.push(weeklyIcon[i].getAttribute("src"));
@@ -236,7 +242,7 @@ function makeCityList (input) {
             windArray.push(weeklyWind[i].textContent);
             humidityArray.push(weeklyHumidity[i].textContent);
         }
-        
+        // arrays stringified in order to be able to save to local storage
         localStorage.setItem("dateArray", JSON.stringify(dateArray));
         localStorage.setItem("iconArray", JSON.stringify(iconArray));
         localStorage.setItem("tempArray", JSON.stringify(tempArray));
@@ -246,7 +252,7 @@ function makeCityList (input) {
         
     }
     
-
+// function to display last saved content on load
     function showLastSearch () {
         currentWeather.textContent = localStorage.getItem("currentWeather");
         weatherIcon.setAttribute("src",localStorage.getItem("currentIcon"));
@@ -255,6 +261,7 @@ function makeCityList (input) {
         currentWindSpeed.textContent = localStorage.getItem("currentWind");
         currentUV.textContent = localStorage.getItem("currentUvi");
         var uv = currentUV.textContent;
+        // conditional used again for uvi background color depending on uvi number
         if ( uv >= 0 && uv <= 2.99) {
             currentUV.classList.add("low");
             currentUV.classList.remove("moderate");
@@ -277,13 +284,13 @@ function makeCityList (input) {
             currentUV.classList.remove("high");
             currentUV.classList.add("very-high");
         }
-    
+    // strings containing data parsed in order to revert them back to arrays
         var dateArray = JSON.parse(localStorage.getItem("dateArray"));
         var iconArray = JSON.parse(localStorage.getItem("iconArray"));
         var tempArray = JSON.parse(localStorage.getItem("tempArray"));   
         var windArray = JSON.parse(localStorage.getItem("windArray"));
         var humidityArray = JSON.parse(localStorage.getItem("humidityArray"));  
-           
+        //  arrays are iterated through to display data
         for(var i = 0; i < weeklyWeatherBlocks.length; i++) {
             weeklyDate[i].textContent = dateArray[i];
             weeklyIcon[i].setAttribute("src",iconArray[i]);
@@ -295,6 +302,7 @@ function makeCityList (input) {
         
 
     }
+    // calls function to display last saved search
     showLastSearch();
 
     
