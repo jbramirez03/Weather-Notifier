@@ -11,7 +11,7 @@
 
 ### In-depth description:
 * How this works is there are pre made divs in the html that will contain the information returned from the api call
-* Through the use of javascript a function goes through the api and sets the premade divs `textContent` to the values in the api
+* Through the use of javascript a function goes through the api and sets the premade div's `textContent` to the values in the api
 * The reason data is rendered in rows is through the use of the css framework [BootStrap](https://getbootstrap.com/)
 * In html divs are given classes that give certain styles and can position things in the document depending on the class name
 * [Moment.Js](https://momentjs.com/) was also used in this page in order to convert a unix timecode in the api data pertaining to a certain day into a readable date
