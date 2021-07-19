@@ -1,8 +1,4 @@
 
-// var momentTest = moment.unix(1626454800).format("DD/MM/YYYY");
-
-// console.log(momentTest);
-
 var searchButton = document.querySelector("#search-button");
 var cityInput = document.querySelector("#city-input");
 var currentWeather = document.querySelector("#current-weather");
@@ -96,8 +92,6 @@ var weeklyHumidity = document.querySelectorAll(".weekly-humidity");
 
 function fiveDayForecast (url) {
 
-
-
     for (var i = 0; i < weeklyWeatherBlocks.length; i++) {
         // weeklyDate[i].textContent = url.daily[i].dt;
         var date = url.daily[i + 1].dt;
@@ -113,13 +107,11 @@ function fiveDayForecast (url) {
         weeklyHumidity[i].textContent = "Humidity: " + humidity;
     }
 
-
-
-
 }
 
 
 function makeCityList (input) {
+
     var createdRow = document.createElement("div");
     createdRow.setAttribute("class", "row");
     var createdContainer = document.createElement("div");
@@ -140,7 +132,6 @@ function makeCityList (input) {
         
     });
 
-
 }
 
     clearBtn.addEventListener("click", function () {
@@ -152,7 +143,7 @@ function makeCityList (input) {
     function cityPrevSearch (val) {
         var cityChoice = val;
 
-    makeCityList(val.innerHTML);
+        makeCityList(val.innerHTML);
     
     
     
@@ -305,3 +296,6 @@ function makeCityList (input) {
 
     }
     showLastSearch();
+
+    
+    
